@@ -3,6 +3,7 @@ package de.sciss.kollflitz
 import scala.util.Random
 import scala.collection.generic.CanBuildFrom
 import language.higherKinds
+import de.sciss.kollflitz.impl.Urn
 
 object RandomOps {
   implicit final class KollFlitzRandomIndexedSeq[A, CC[~] <: IndexedSeq[~]](val self: CC[A]) extends AnyVal {
@@ -21,6 +22,14 @@ object RandomOps {
         b        += elem
       }
       b.result()
+    }
+
+    def toUrn(implicit random: Random): Iterator[A] = toUrn(infinite = true)
+
+    def toUrn(infinite: Boolean)(implicit random: Random): Iterator[A] = {
+      // XXX TODO: this is a bit dirty...
+      val im = if (self.isInstanceOf[Immutable]) self.asInstanceOf[Vec[A]] else self.toVector
+      new Urn(im, infinite = infinite)
     }
   }
 }

@@ -1,6 +1,7 @@
 package de.sciss.kollflitz
 
 import org.scalatest.{Matchers, FlatSpec}
+import Ops._
 
 class OpsSpec extends FlatSpec with Matchers {
   val blah = "allow the invocation of extended methods"
@@ -85,5 +86,12 @@ class OpsSpec extends FlatSpec with Matchers {
       in1.contains(in1.choose())
     }
     assert(testContains)
+
+    // ---- Urn ----
+
+    val urn = in1.toUrn.take(in1.size * 2).toVector
+    assert(urn.size == in1.size * 2)
+
+    urn.sorted shouldEqual (in1 ++ in1).sorted
   }
 }

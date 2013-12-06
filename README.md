@@ -64,6 +64,7 @@ Random operation require an implicit value of type `util.Random`. They must be i
 
 - `choose` returns a random element of an indexed sequence.
 - `scramble` returns a copy of the collection where the order of elements is randomised.
+- `toUrn` returns a scrambled iterator (an argument specifies whether it is infinite or not)
 
 ## limitations
 

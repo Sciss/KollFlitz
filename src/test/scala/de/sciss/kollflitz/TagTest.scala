@@ -1,5 +1,7 @@
 package de.sciss.kollflitz
 
+import Ops._
+
 object TagTest extends App {
   val vec     = Vec(3, 5, 1, 10, -1, 22)
   val tagged  = tag[Sorted](vec) : Vec[Int] @@ Sorted
