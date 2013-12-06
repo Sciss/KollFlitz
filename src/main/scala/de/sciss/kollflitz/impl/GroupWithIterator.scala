@@ -9,15 +9,15 @@ final class GroupWithIterator[A, From, To](peer: Iterator[A], p: (A, A) => Boole
   extends Iterator[To] {
 
   private var consumed  = true
-  private var elem      = null.asInstanceOf[A]
+  private var e         = null.asInstanceOf[A]
 
   def hasNext: Boolean = !consumed || peer.hasNext
 
   private def pop(): A = {
-    if (!consumed) return elem
+    if (!consumed) return e
     if (!peer.hasNext) throw new NoSuchElementException("next on empty iterator")
     val res   = peer.next()
-    elem      = res
+    e         = res
     consumed  = false
     res
   }
@@ -25,12 +25,12 @@ final class GroupWithIterator[A, From, To](peer: Iterator[A], p: (A, A) => Boole
   def next(): To = {
     val b = cbf()
 
-    @tailrec def loop(pred: A): Unit = {
-      b       += pred
+    @tailrec def loop(pr: A): Unit = {
+      b += pr
       consumed = true
       if (peer.hasNext) {
-        val succ = pop()
-        if (p(pred, succ)) loop(succ)
+        val su = pop()
+        if (p(pr, su)) loop(su)
       }
     }
 

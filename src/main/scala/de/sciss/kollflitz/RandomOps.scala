@@ -16,10 +16,10 @@ object RandomOps {
       var rem   = self: IndexedSeq[A]
 
       while (rem.nonEmpty) {
-        val idx   = random.nextInt(rem.size)
-        val elem  = rem(idx)
-        rem       = rem.patch(idx, Nil, 1)
-        b        += elem
+        val idx = random.nextInt(rem.size)
+        val e   = rem(idx)
+        rem     = rem.patch(idx, Nil, 1)
+        b      += e
       }
       b.result()
     }
@@ -27,8 +27,11 @@ object RandomOps {
     def toUrn(implicit random: Random): Iterator[A] = toUrn(infinite = true)
 
     def toUrn(infinite: Boolean)(implicit random: Random): Iterator[A] = {
-      // XXX TODO: this is a bit dirty...
-      val im = if (self.isInstanceOf[Immutable]) self.asInstanceOf[Vec[A]] else self.toVector
+      // ensure immutability of input collection
+      val im: Vec[A] = self match {
+        case vec: Vec[A]  => vec
+        case _            => self.toVector
+      }
       new Urn(im, infinite = infinite)
     }
   }

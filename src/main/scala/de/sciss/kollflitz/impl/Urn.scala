@@ -11,10 +11,11 @@ final class Urn[A](elements0: Vec[A], infinite: Boolean)(implicit r: Random)
   def hasNext: Boolean = bag.nonEmpty || (infinite && elements0.nonEmpty)
 
   def next(): A = {
-    if (bag.isEmpty && infinite) bag = elements0
+    if (bag.isEmpty && infinite) bag = elements0  // refill
+
     val idx   = r.nextInt(bag.size)
-    val elem  = bag(idx)
+    val e     = bag(idx)
     bag       = bag.patch(idx, Nil, 1)
-    elem
+    e
   }
 }

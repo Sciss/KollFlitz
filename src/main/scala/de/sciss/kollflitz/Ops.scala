@@ -21,28 +21,39 @@ object Ops {
       *
       * @return a map with the elements counted.
       */
-    def counted: Map[A, Int] = (Map.empty[A, Int].withDefaultValue(0) /: self)((m, e) => m.updated(e, m(e) + 1))
+    def counted: Map[A, Int] = {
+      var m   = Map.empty[A, Int].withDefaultValue(0)
+      val it  = self.iterator
+      while (it.hasNext) {
+        val e = it.next()
+        m     = m.updated(e, m(e) + 1)
+      }
+      m
+    }
 
     def mean(implicit num: Fractional[A]): A = {
-      var sum   = num.zero
-      var size  = num.zero
-      val one   = num.one
-      import num.mkNumericOps
-      self.foreach { e =>
-        sum  += e
-        size += one
+      import num._
+      var sum   = zero
+      var size  = zero
+      val it    = self.iterator
+      while (it.hasNext) {
+        val e = it.next()
+        sum   = plus(sum , e  )
+        size  = plus(size, one)
       }
-      sum / size
+      div(sum, size)
     }
 
     def variance(implicit num: Fractional[A]): A = varianceImpl(mean)
 
     private def varianceImpl(mean: A)(implicit num: Fractional[A]): A = {
-      import num.mkNumericOps
-      var variance = num.zero
-      self.foreach { e =>
-        val d = e - mean
-        variance += d * d
+      import num._
+      var variance  = zero
+      val it        = self.iterator
+      while (it.hasNext) {
+        val e     = it.next()
+        val d     = minus(e, mean)
+        variance  = plus(variance, times(d, d))
       }
       variance
     }
@@ -70,11 +81,11 @@ object Ops {
     def isSortedBy[B](fun: A => B)(implicit ord: Ordering[B]): Boolean = {
       val it = self.iterator
       if (!it.hasNext) return true
-      var pred = it.next()
+      var pr = it.next()
       while (it.hasNext) {
-        val succ = it.next()
-        if (ord.gt(fun(pred), fun(succ))) return false
-        pred = succ
+        val su = it.next()
+        if (ord.gt(fun(pr), fun(su))) return false
+        pr = su
       }
       true
     }
@@ -104,14 +115,14 @@ object Ops {
       new GroupWithIterator(self.iterator, p)
 
     def pairMap[B, To](fun: (A, A) => B)(implicit cbf: CanBuildFrom[Repr, B, To]): To = {
-      val b     = cbf(self)
-      val iter  = self.iterator
-      if (iter.hasNext) {
-        var pred = iter.next()
-        while (iter.hasNext) {
-          val succ = iter.next()
-          b   += fun(pred, succ)
-          pred = succ
+      val b   = cbf(self)
+      val it  = self.iterator
+      if (it.hasNext) {
+        var pr = it.next()
+        while (it.hasNext) {
+          val su = it.next()
+          b     += fun(pr, su)
+          pr     = su
         }
       }
       b.result()
@@ -125,12 +136,8 @@ object Ops {
       * @return a new collection having a size one less than the input collection. the first element will
       *         be the different of the second and first element of the input sequence, etc.
       */
-    def differentiate[To](implicit num: Numeric[A], cbf: CanBuildFrom[Repr, A, To]): To = {
-      import num.mkNumericOps
-      pairMap {
-        case (pred, succ) => succ - pred
-      }
-    }
+    def differentiate[To](implicit num: Numeric[A], cbf: CanBuildFrom[Repr, A, To]): To =
+      pairMap { (a, b) => num.minus(b, a) }
 
     /** Integrates the collection by aggregating the elements step by step.
       *
@@ -142,21 +149,18 @@ object Ops {
       *         the sum of the first and second element of the input sequence, etc.
       */
     def integrate[To](implicit num: Numeric[A], cbf: CanBuildFrom[Repr, A, To]): To = {
+      import num._
       val b     = cbf(self)
-      val iter  = self.iterator
-      var agg   = num.zero
-      while (iter.hasNext) {
-        val elem = iter.next()
-        agg = num.plus(agg, elem)
-        b += agg
+      val it    = self.iterator
+      var agg   = zero
+      while (it.hasNext) {
+        val e = it.next()
+        agg   = plus(agg, e)
+        b    += agg
       }
       b.result()
     }
   }
-
-  //  implicit final class KollFlitzSortedIndexedSeq[A](val sq: IndexedSeq[A] @@ Sorted) extends AnyVal {
-  //
-  //  }
 
   /** Enrichment methods for random access collections. */
   implicit final class KollFlitzSortedIndexedSeq[A](val self: IndexedSeq[A] @@ Sorted) extends AnyVal {
@@ -165,7 +169,5 @@ object Ops {
 
     /** Median found by rounding the index (no interpolation). */
     def median: A = percentile(50)
-
-    // def percentile(n: Int)(implicit sorted: CC <:< Tagged[Sorted]): A = sq((sq.size * n - 50) / 100)
   }
 }

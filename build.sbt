@@ -1,6 +1,6 @@
 name          := "KollFlitz"
 
-version       := "0.1.0"
+version       := "0.1.1-SNAPSHOT"
 
 organization  := "de.sciss"
 
