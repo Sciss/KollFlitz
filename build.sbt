@@ -1,4 +1,4 @@
-name          := "KillFlitz"
+name          := "KollFlitz"
 
 version       := "0.1.0"
 
