@@ -28,10 +28,7 @@ object RandomOps {
 
     def toUrn(infinite: Boolean)(implicit random: Random): Iterator[A] = {
       // ensure immutability of input collection
-      val im: Vec[A] = self match {
-        case vec: Vec[A]  => vec
-        case _            => self.toVector
-      }
+      val im = self.toIndexedSeq
       new Urn(im, infinite = infinite)
     }
   }
