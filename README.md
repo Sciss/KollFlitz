@@ -14,13 +14,13 @@ This is used for scientific projects and rapid prototyping. The emphasis is _not
 
 ## requirements / installation
 
-This project currently compiles against Scala 2.10 using sbt 0.13.
+This project currently compiles against Scala 2.11, 2.10 using sbt 0.13.
 
 To use the library in your project:
 
     "de.sciss" %% "kollflitz" % v
 
-The current version `v` is `"0.1.+"`
+The current version `v` is `"0.2.+"`
 
 ## operations
 
@@ -29,8 +29,12 @@ The current version `v` is `"0.1.+"`
 - `counted` creates a map from elements to the frequencies of their occurrence. Example:
 `List(13, 5, 8, 21, 3, 8).counted == Map(3 -> 1, 5 -> 1, 8 -> 2, 13 -> 1, 21 -> 1)`
 
-- `meanVariance` returns a tuple of mean and variance, using an implicit `Fractional` type class. Example:
+- `mean`, `variance`, `meanVariance`. `meanVariance` returns a tuple of mean and variance, using an implicit `Fractional` type class. Example:
 `List(13.0, 5.0, 9.0).meanVariance == (9.0, 32.0)`
+
+- `normalized` transforms the elements by dividing them by the maximum absolute value. Example: `List(13.0, 5.0, -9.0).normalized == List(1.0, 0.3846, -0.6923)`
+
+- `toMultiMap` takes a key and a value view function and produces a multi-map. Example: `List("a1", "b1", "a2", "b3", "c2", "c3").toMultiMap(_.head)(_.drop(1).toInt) == Map(b -> Vector(1, 3), a -> Vector(1, 2), c -> Vector(2, 3))`
 
 ### On sequential collections (`SeqLike`)
 
@@ -42,8 +46,10 @@ mistakes when calling methods such as `percentile` which assume that the collect
 
 - `isSortedBy` and `isSorted` are boolean tests
 
-- `pairMap` is a mapping operation taking a function with two arguments which is applied with adjacent elements. Example:
-`List(13, 5, 8, 21, 3, 8).pairMap(_ - _) == List(8, -3, -13, 18, -5)`
+- `mapPairs` is a mapping operation taking a function with two arguments which is applied with adjacent elements. Example:
+`List(13, 5, 8, 21, 3, 8).mapPairs(_ - _) == List(8, -3, -13, 18, -5)`
+
+- `foreachPairs` iterates using a function with two arguments which is applied with adjacent elements. `foreachPairs` is to `mapPairs` what `foreach` is to `map`.
 
 - `differentiate` is a special pair map that uses a numeric type class to calculate the pairwise differences. Example:
 `List(13, 5, 8, 21, 3, 8).differentiate == List(-8, 3, 13, -18, 5)`

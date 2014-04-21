@@ -1,26 +1,29 @@
-name          := "KollFlitz"
+name               := "KollFlitz"
 
-version       := "0.1.1-SNAPSHOT"
+version            := "0.2.0"
 
-organization  := "de.sciss"
+organization       := "de.sciss"
 
-scalaVersion  := "2.10.3"
+scalaVersion       := "2.11.0"
 
-description   := "Useful methods for Scala collections which I tend to copy and paste once a week"
+crossScalaVersions := Seq("2.11.0", "2.10.4")
 
-homepage      := Some(url("https://github.com/Sciss/" + name.value))
+description        := "Useful methods for Scala collections which I tend to copy and paste once a week"
 
-licenses      := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-2.1.txt"))
+homepage           := Some(url("https://github.com/Sciss/" + name.value))
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.0" % "test"
+licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-2.1.txt"))
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.1.3" % "test"
 
 initialCommands in console :=
   """import de.sciss.kollflitz._
+    |import Ops._
     |import RandomOps._""".stripMargin
 
-retrieveManaged := true
+// retrieveManaged := true
 
-scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature")
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature", "-Xfuture")
 
 // ---- publishing ----
 

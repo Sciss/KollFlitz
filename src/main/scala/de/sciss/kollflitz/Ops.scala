@@ -1,5 +1,19 @@
+/*
+ *  Ops.scala
+ *  (KollFlitz)
+ *
+ *  Copyright (c) 2013-2014 Hanns Holger Rutz. All rights reserved.
+ *
+ *  This software is published under the GNU Lesser General Public License v2.1+
+ *
+ *
+ *  For further information, please contact Hanns Holger Rutz at
+ *  contact@sciss.de
+ */
+
 package de.sciss.kollflitz
 
+import scala.collection.mutable
 import scala.collection.SeqLike
 import scala.collection.generic.CanBuildFrom
 import de.sciss.kollflitz.impl.GroupWithIterator
@@ -68,6 +82,38 @@ object Ops {
       val v = varianceImpl(m)
       (m, v)
     }
+
+    /** Normalizes the elements by finding the maximum absolute value
+      * and dividing each element by this value.
+      *
+      * If the collection is empty or the maximum absolute value is zero,
+      * the original collection is returned.
+      *
+      * @param num  numerical view of the element type
+      */
+    def normalized(implicit num: Fractional[A], cbf: CanBuildFrom[CC[A], A, CC[A]]): CC[A] = {
+      if (self.isEmpty) return self
+      val mx = self.maxBy(num.abs)
+      if (mx == num.zero) return self
+
+      val b = cbf(self)
+      val it    = self.iterator
+      while (it.hasNext) {
+        val e   = it.next()
+        val e1  = num.div(e, mx)
+        b += e1
+      }
+      b.result()
+    }
+
+    def toMultiMap[K, V, Values](key: A => K)(value: A => V)
+                                (implicit cbfv: CanBuildFrom[Nothing, V, Values]): Map[K, Values] = {
+      val b = mutable.Map.empty[K, mutable.Builder[V, Values]]
+      self.foreach { elem =>
+        b.getOrElseUpdate(key(elem), cbfv()) += value(elem)
+      }
+      b.map { case (k, vb) => (k, vb.result()) } (collection.breakOut)
+    }
   }
 
   /** Enrichment methods for sequential collections. */
@@ -114,7 +160,7 @@ object Ops {
     def groupWith[To](p: (A, A) => Boolean)(implicit cbf: CanBuildFrom[Repr, A, To]): Iterator[To] =
       new GroupWithIterator(self.iterator, p)
 
-    def pairMap[B, To](fun: (A, A) => B)(implicit cbf: CanBuildFrom[Repr, B, To]): To = {
+    def mapPairs[B, To](fun: (A, A) => B)(implicit cbf: CanBuildFrom[Repr, B, To]): To = {
       val b   = cbf(self)
       val it  = self.iterator
       if (it.hasNext) {
@@ -128,6 +174,18 @@ object Ops {
       b.result()
     }
 
+    def foreachPair(fun: (A, A) => Unit): Unit = {
+      val it  = self.iterator
+      if (it.hasNext) {
+        var pr = it.next()
+        while (it.hasNext) {
+          val su = it.next()
+          fun(pr, su)
+          pr     = su
+        }
+      }
+    }
+
     /** Differentiates the collection by calculating the pairwise difference of the elements.
       *
       * @param num    the numerical view of the elements
@@ -137,7 +195,7 @@ object Ops {
       *         be the different of the second and first element of the input sequence, etc.
       */
     def differentiate[To](implicit num: Numeric[A], cbf: CanBuildFrom[Repr, A, To]): To =
-      pairMap { (a, b) => num.minus(b, a) }
+      mapPairs { (a, b) => num.minus(b, a) }
 
     /** Integrates the collection by aggregating the elements step by step.
       *

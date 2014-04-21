@@ -44,8 +44,8 @@ class OpsSpec extends FlatSpec with Matchers {
 
     // ---- pairMap ----
 
-    in1.pairMap(_ min _) shouldEqual List(5, 5, 8, 3, 3)
-    in1.pairMap(_ -   _) shouldEqual List(8, -3, -13, 18, -5)
+    in1.mapPairs(_ min _) shouldEqual List(5, 5, 8, 3, 3)
+    in1.mapPairs(_ -   _) shouldEqual List(8, -3, -13, 18, -5)
 
     // ---- differentiate ----
 
