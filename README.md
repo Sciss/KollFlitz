@@ -1,5 +1,8 @@
 # KollFlitz
 
+[![Flattr this](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=sciss&url=https%3A%2F%2Fgithub.com%2FSciss%2FKollFlitz&title=KollFlitz%20Library&language=Scala&tags=github&category=software)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.11)
+
 ## statement
 
 KollFlitz provides extension methods for the Scala standard collection library. Things that I tend to require often,
