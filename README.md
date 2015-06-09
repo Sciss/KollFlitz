@@ -58,7 +58,7 @@ mistakes when calling methods such as `percentile` which assume that the collect
 `List(13, 5, 8, 21, 3, 8).differentiate == List(-8, 3, 13, -18, 5)`
 
 - `integrate` is the opposite of `differentiate`. It aggregates a running sum. Example:
-`List(0, -8, 3, 13, -18, 5).integrate == List(13, 5, 8, 21, 3, 8)`
+`List(13, -8, 3, 13, -18, 5).integrate == List(13, 5, 8, 21, 3, 8)`
 
 ### On sorted indexed collections (`IndexedSeq @@ Sorted`)
 

@@ -1,12 +1,12 @@
 name               := "KollFlitz"
 
-version            := "0.2.0"
+version            := "0.2.1-SNAPSHOT"
 
 organization       := "de.sciss"
 
-scalaVersion       := "2.11.0"
+scalaVersion       := "2.11.6"
 
-crossScalaVersions := Seq("2.11.0", "2.10.4")
+crossScalaVersions := Seq("2.11.6", "2.10.5")
 
 description        := "Useful methods for Scala collections which I tend to copy and paste once a week"
 
@@ -14,7 +14,7 @@ homepage           := Some(url("https://github.com/Sciss/" + name.value))
 
 licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-2.1.txt"))
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.1.3" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.5" % "test"
 
 initialCommands in console :=
   """import de.sciss.kollflitz._
@@ -23,14 +23,14 @@ initialCommands in console :=
 
 // retrieveManaged := true
 
-scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature", "-Xfuture")
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature", "-Xfuture", "-encoding", "utf8")
 
 // ---- publishing ----
 
 publishMavenStyle := true
 
 publishTo :=
-  Some(if (version.value endsWith "-SNAPSHOT")
+  Some(if (isSnapshot.value)
     "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
   else
     "Sonatype Releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2"
