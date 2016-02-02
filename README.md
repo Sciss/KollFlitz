@@ -1,6 +1,7 @@
 # KollFlitz
 
 [![Flattr this](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=sciss&url=https%3A%2F%2Fgithub.com%2FSciss%2FKollFlitz&title=KollFlitz%20Library&language=Scala&tags=github&category=software)
+[![Build Status](https://travis-ci.org/Sciss/KollFlitz.svg?branch=master)](https://travis-ci.org/Sciss/KollFlitz)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.11)
 
 ## statement
@@ -23,7 +24,11 @@ To use the library in your project:
 
     "de.sciss" %% "kollflitz" % v
 
-The current version `v` is `"0.2.+"`
+The current version `v` is `"0.2.0"`
+
+## contributing
+
+Please see the file [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## operations
 
