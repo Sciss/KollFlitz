@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/Sciss/KollFlitz.svg?branch=master)](https://travis-ci.org/Sciss/KollFlitz)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.11)
 
-## statement
+## Statement
 
 KollFlitz provides extension methods for the Scala standard collection library. Things that I tend to require often,
 like calculating mean, variance or percentiles, mapping groups, counting occurrences etc.
@@ -12,11 +12,11 @@ like calculating mean, variance or percentiles, mapping groups, counting occurre
 It is released under the [GNU Lesser General Public License](https://raw.github.com/Sciss/KollFlitz/master/LICENSE) v2.1+
 and comes with absolutely no warranties. To contact the author, send an email to `contact at sciss.de`.
 
-## note
+## Note
 
 This is used for scientific projects and rapid prototyping. The emphasis is _not_ on performance optimisation.
 
-## requirements / installation
+## Requirements / Installation
 
 This project currently compiles against Scala 2.12, 2.11, 2.10 using sbt 0.13.
 
@@ -26,11 +26,11 @@ To use the library in your project:
 
 The current version `v` is `"0.2.1"`
 
-## contributing
+## Contributing
 
 Please see the file [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## operations
+## Operations
 
 ### On any type of collection, sequential or not (`Iterable`)
 
@@ -65,7 +65,7 @@ mistakes when calling methods such as `percentile` which assume that the collect
 - `integrate` is the opposite of `differentiate`. It aggregates a running sum. Example:
 `List(13, -8, 3, 13, -18, 5).integrate == List(13, 5, 8, 21, 3, 8)`
 
-### On sorted indexed collections (`IndexedSeq @@ Sorted`)
+### On sorted indexed collections (`IndexedSeq @@ Sorted`)
 
 - `percentile` returns a given percentile of the sorted collection. It picks an integer index and does not interpolate
 values. Example: `Vector(13, 5, 8, 21, 3, 8).sortedT.percentile(75) == 13`
@@ -80,6 +80,6 @@ Random operation require an implicit value of type `util.Random`. They must be i
 - `scramble` returns a copy of the collection where the order of elements is randomised.
 - `toUrn` returns a scrambled iterator (an argument specifies whether it is infinite or not)
 
-## limitations
+## Limitations
 
 The acrobatics for allowing `String` and `Array` to be extended by these operations have not been performed.
