@@ -2,7 +2,7 @@
  *  GroupWithIterator.scala
  *  (KollFlitz)
  *
- *  Copyright (c) 2013-2014 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2013-2018 Hanns Holger Rutz. All rights reserved.
  *
  *  This software is published under the GNU Lesser General Public License v2.1+
  *
@@ -15,7 +15,6 @@ package de.sciss.kollflitz.impl
 
 import scala.collection.generic.CanBuildFrom
 import scala.annotation.tailrec
-import language.higherKinds
 
 final class GroupWithIterator[A, From, To](peer: Iterator[A], p: (A, A) => Boolean)
                                           (implicit cbf: CanBuildFrom[From, A, To])

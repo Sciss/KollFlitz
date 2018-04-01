@@ -1,14 +1,14 @@
 lazy val baseName  = "KollFlitz"
 lazy val baseNameL = baseName.toLowerCase
 
-lazy val projectVersion = "0.2.1"
-lazy val mimaVersion    = "0.2.0"
+lazy val projectVersion = "0.2.2"
+lazy val mimaVersion    = "0.2.1"
 
 name               := baseName
 version            := projectVersion
 organization       := "de.sciss"
-scalaVersion       := "2.11.8"
-crossScalaVersions := Seq("2.12.1", "2.11.8", "2.10.6")
+scalaVersion       := "2.12.5"
+crossScalaVersions := Seq("2.12.5", "2.11.12")
 description        := "Useful methods for Scala collections which I tend to copy and paste once a week"
 homepage           := Some(url(s"https://github.com/Sciss/${name.value}"))
 licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-2.1.txt"))
@@ -22,7 +22,7 @@ initialCommands in console :=
     |import Ops._
     |import RandomOps._""".stripMargin
 
-scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature", "-Xfuture", "-encoding", "utf8", "-Xlint")
+scalacOptions in (Compile, compile) ++= Seq("-deprecation", "-unchecked", "-feature", "-Xfuture", "-encoding", "utf8", "-Xlint")
 
 // ---- publishing ----
 

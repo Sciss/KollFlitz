@@ -2,7 +2,7 @@
  *  package.scala
  *  (KollFlitz)
  *
- *  Copyright (c) 2013-2014 Hanns Holger Rutz. All rights reserved.
+ *  Copyright (c) 2013-2018 Hanns Holger Rutz. All rights reserved.
  *
  *  This software is published under the GNU Lesser General Public License v2.1+
  *
@@ -13,14 +13,16 @@
 
 package de.sciss
 
-import language.higherKinds
-
 package object kollflitz {
   /** `Vec` is an alias for `immutable.IndexedSeq`. You will thus get `Vector` instances
     * while letting Scala still pick the default implementation and maintaining an opaque type.
     */
   val  Vec      = collection.immutable.IndexedSeq
   type Vec[+A]  = collection.immutable.IndexedSeq[A]
+
+  /** `ISeq` is an alias for `immutable.Seq`. */
+  val  ISeq     = collection.immutable.Seq
+  type ISeq[+A] = collection.immutable.Seq[A]
 
   // courtesy of Miles Sabin
   type Tagged[U]  = { type Tag  = U }
