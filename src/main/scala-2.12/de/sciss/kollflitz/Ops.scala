@@ -340,7 +340,7 @@ object Ops {
         if (skip == 0) {
           b += e
           skip = n0
-       }
+        }
       }
       b.result()
     }

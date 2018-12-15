@@ -1,21 +1,24 @@
 lazy val baseName  = "KollFlitz"
 lazy val baseNameL = baseName.toLowerCase
 
-lazy val projectVersion = "0.2.2"
+lazy val projectVersion = "0.2.3-SNAPSHOT"
 lazy val mimaVersion    = "0.2.1"
 
 name               := baseName
 version            := projectVersion
 organization       := "de.sciss"
-scalaVersion       := "2.12.5"
-crossScalaVersions := Seq("2.12.5", "2.11.12")
+scalaVersion       := "2.13.0-M5"
+crossScalaVersions := Seq("2.12.8", "2.11.12", "2.13.0-M5")
 description        := "Useful methods for Scala collections which I tend to copy and paste once a week"
-homepage           := Some(url(s"https://github.com/Sciss/${name.value}"))
+homepage           := Some(url(s"https://git.iem.at/sciss/${name.value}"))
 licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-2.1.txt"))
 
 mimaPreviousArtifacts := Set("de.sciss" %% baseNameL % mimaVersion)
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+libraryDependencies += {
+  val v = if (scalaVersion.value == "2.13.0-M5") "3.0.6-SNAP5" else "3.0.5"
+  "org.scalatest" %% "scalatest" % v % Test
+}
 
 initialCommands in console :=
   """import de.sciss.kollflitz._
@@ -41,8 +44,8 @@ pomIncludeRepository := { _ => false }
 
 pomExtra := { val n = name.value
 <scm>
-  <url>git@github.com:Sciss/{n}.git</url>
-  <connection>scm:git:git@github.com:Sciss/{n}.git</connection>
+  <url>git@git.iem.at:sciss/{n}.git</url>
+  <connection>scm:git:git@git.iem.at:sciss/{n}.git</connection>
 </scm>
 <developers>
   <developer>

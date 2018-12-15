@@ -36,8 +36,8 @@ class OpsSpec extends FlatSpec with Matchers {
     in1.minIndexBy(-_) shouldBe 3
     in1.maxIndexBy(-_) shouldBe 4
 
-    List().minIndex shouldBe -1
-    List().maxIndex shouldBe -1
+    List[Int]().minIndex shouldBe -1
+    List[Int]().maxIndex shouldBe -1
   }
 
   "Some sequential collections" should blah in {
@@ -47,7 +47,9 @@ class OpsSpec extends FlatSpec with Matchers {
     // ---- groupWith ----
 
     in1.groupWith(_ > _).toVector shouldEqual Vector(List(13, 5), List(8), List(21, 3), List(8))
-    in2.toSeq.groupWith(_ != _).map(_.mkString).toList shouldEqual List("hel", "lo world")
+    // XXX TODO --- String#toSeq seems currently broken in Scala 2.13.0-M5. `toList` works
+//    in2.toSeq.groupWith(_ != _).map(_.mkString).toList shouldEqual List("hel", "lo world")
+    in2.toList.groupWith(_ != _).map(_.mkString).toList shouldEqual List("hel", "lo world")
 
     // ---- sorting ----
 
@@ -79,16 +81,16 @@ class OpsSpec extends FlatSpec with Matchers {
     in3.stutter(1) shouldEqual in3
     in3.stutter(2) shouldEqual List(
       13, 13, -8, -8, 3, 3, 13, 13, -18, -18, 5, 5)
-    List().stutter(0) shouldEqual List()
-    List().stutter(1) shouldEqual List()
-    List().stutter(2) shouldEqual List()
+    List[Any]().stutter(0) shouldEqual List()
+    List[Any]().stutter(1) shouldEqual List()
+    List[Any]().stutter(2) shouldEqual List()
 
     // ---- mirror ----
 
     in3.mirror shouldEqual List(
       13, -8, 3, 13, -18, 5, -18, 13, 3, -8, 13)
     List(1).mirror shouldEqual List(1)
-    List() .mirror shouldEqual List()
+    List[Any]() .mirror shouldEqual List()
 
     // ---- decimate ----
 
@@ -100,14 +102,14 @@ class OpsSpec extends FlatSpec with Matchers {
     in3.decimate(3, offset = 1) shouldEqual List(-8, -18)
     in3.decimate(3, offset = 2) shouldEqual List(3, 5)
 
-    List(1).decimate(0) shouldEqual List(1)
-    List() .decimate(0) shouldEqual List()
-    List(1).decimate(1) shouldEqual List(1)
-    List() .decimate(1) shouldEqual List()
-    List(1).decimate(2) shouldEqual List(1)
-    List() .decimate(2) shouldEqual List()
-    List(1).decimate(3) shouldEqual List(1)
-    List() .decimate(3) shouldEqual List()
+    List(1)     .decimate(0) shouldEqual List(1)
+    List[Any]() .decimate(0) shouldEqual List()
+    List(1)     .decimate(1) shouldEqual List(1)
+    List[Any]() .decimate(1) shouldEqual List()
+    List(1)     .decimate(2) shouldEqual List(1)
+    List[Any]() .decimate(2) shouldEqual List()
+    List(1)     .decimate(3) shouldEqual List(1)
+    List[Any]() .decimate(3) shouldEqual List()
 
     // ---- wrapAt, foldAt, clipAt ----
 

@@ -1,0 +1,54 @@
+/*
+ *  GroupWithIterator.scala
+ *  (KollFlitz)
+ *
+ *  Copyright (c) 2013-2018 Hanns Holger Rutz. All rights reserved.
+ *
+ *  This software is published under the GNU Lesser General Public License v2.1+
+ *
+ *
+ *  For further information, please contact Hanns Holger Rutz at
+ *  contact@sciss.de
+ */
+
+package de.sciss.kollflitz.impl
+
+import scala.annotation.tailrec
+import scala.collection.{BuildFrom, SeqOps}
+import scala.language.higherKinds
+
+final class GroupWithIterator[A, CC[_], Repr, To](self: SeqOps[A, CC, Repr] with Repr, p: (A, A) => Boolean)
+                                                 (implicit cbf: BuildFrom[Repr, A, To])
+  extends Iterator[To] {
+
+  private val peer      = self.iterator
+  private var consumed  = true
+  private var e         = null.asInstanceOf[A]
+
+  def hasNext: Boolean = !consumed || peer.hasNext
+
+  private def pop(): A = {
+    if (!consumed) return e
+    if (!peer.hasNext) throw new NoSuchElementException("next on empty iterator")
+    val res   = peer.next()
+    e         = res
+    consumed  = false
+    res
+  }
+
+  def next(): To = {
+    val b = cbf.newBuilder(self)
+
+    @tailrec def loop(pr: A): Unit = {
+      b += pr
+      consumed = true
+      if (peer.hasNext) {
+        val su = pop()
+        if (p(pr, su)) loop(su)
+      }
+    }
+
+    loop(pop())
+    b.result()
+  }
+}
