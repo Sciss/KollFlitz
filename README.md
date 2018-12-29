@@ -9,7 +9,7 @@ KollFlitz provides extension methods for the Scala standard collection library. 
 like calculating mean, variance or percentiles, mapping groups, counting occurrences etc.,
 as well as a number of collection operations available in [SuperCollider](https://supercollider.github.io/).
 
-It is released under the [GNU Lesser General Public License](https://raw.github.com/Sciss/KollFlitz/master/LICENSE) v2.1+
+It is released under the [GNU Lesser General Public License](https://git.iem.at/sciss/KollFlitz/raw/master/LICENSE) v2.1+
 and comes with absolutely no warranties. To contact the author, send an email to `contact at sciss.de`.
 
 ## Note
@@ -24,7 +24,7 @@ To use the library in your project:
 
     "de.sciss" %% "kollflitz" % v
 
-The current version `v` is `"0.2.2"`.
+The current version `v` is `"0.2.3"`.
 
 To play around with these operations, run `sbt console`.
 

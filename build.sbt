@@ -1,7 +1,7 @@
 lazy val baseName  = "KollFlitz"
 lazy val baseNameL = baseName.toLowerCase
 
-lazy val projectVersion = "0.2.3-SNAPSHOT"
+lazy val projectVersion = "0.2.3"
 lazy val mimaVersion    = "0.2.1"
 
 name               := baseName
