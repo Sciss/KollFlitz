@@ -7,8 +7,8 @@ lazy val mimaVersion    = "0.2.1"
 name               := baseName
 version            := projectVersion
 organization       := "de.sciss"
-scalaVersion       := "2.13.0-M5"
-crossScalaVersions := Seq("2.12.8", "2.11.12", "2.13.0-M5")
+scalaVersion       := "2.12.8"
+crossScalaVersions := Seq("2.12.8", "2.11.12", "2.13.0-RC2")
 description        := "Useful methods for Scala collections which I tend to copy and paste once a week"
 homepage           := Some(url(s"https://git.iem.at/sciss/${name.value}"))
 licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-2.1.txt"))
@@ -16,8 +16,12 @@ licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-
 mimaPreviousArtifacts := Set("de.sciss" %% baseNameL % mimaVersion)
 
 libraryDependencies += {
-  val v = if (scalaVersion.value == "2.13.0-M5") "3.0.6-SNAP5" else "3.0.5"
-  "org.scalatest" %% "scalatest" % v % Test
+  val v = "3.0.8-RC2"
+  if (scalaVersion.value == "2.13.0-RC2") {
+    "org.scalatest" % "scalatest_2.13.0-RC1" % v % Test
+  } else {
+    "org.scalatest" %% "scalatest" % v % Test
+  }
 }
 
 initialCommands in console :=

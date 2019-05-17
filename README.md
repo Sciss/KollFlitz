@@ -1,7 +1,7 @@
 # KollFlitz
 
 [![Build Status](https://travis-ci.org/Sciss/KollFlitz.svg?branch=master)](https://travis-ci.org/Sciss/KollFlitz)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.11)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.12)
 
 ## Statement
 
