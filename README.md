@@ -18,7 +18,7 @@ This is used for scientific projects and rapid prototyping. The emphasis is _not
 
 ## Requirements / Installation
 
-This project currently compiles against Scala 2.12, 2.11, using sbt.
+This project currently compiles against Scala 2.13, 2.12, 2.11, using sbt.
 
 To use the library in your project:
 

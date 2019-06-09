@@ -8,7 +8,7 @@ name               := baseName
 version            := projectVersion
 organization       := "de.sciss"
 scalaVersion       := "2.12.8"
-crossScalaVersions := Seq("2.12.8", "2.11.12", "2.13.0-RC2")
+crossScalaVersions := Seq("2.12.8", "2.11.12", "2.13.0")
 description        := "Useful methods for Scala collections which I tend to copy and paste once a week"
 homepage           := Some(url(s"https://git.iem.at/sciss/${name.value}"))
 licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-2.1.txt"))
@@ -16,9 +16,9 @@ licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-
 mimaPreviousArtifacts := Set("de.sciss" %% baseNameL % mimaVersion)
 
 libraryDependencies += {
-  val v = "3.0.8-RC2"
-  if (scalaVersion.value == "2.13.0-RC2") {
-    "org.scalatest" % "scalatest_2.13.0-RC1" % v % Test
+  val v = "3.0.8-RC5"
+  if (scalaVersion.value == "2.13.0") {
+    "org.scalatest" % "scalatest_2.13.0-RC3" % v % Test
   } else {
     "org.scalatest" %% "scalatest" % v % Test
   }
@@ -29,7 +29,7 @@ initialCommands in console :=
     |import Ops._
     |import RandomOps._""".stripMargin
 
-scalacOptions in (Compile, compile) ++= Seq("-deprecation", "-unchecked", "-feature", "-Xfuture", "-encoding", "utf8", "-Xlint")
+scalacOptions in (Compile, compile) ++= Seq("-deprecation", "-unchecked", "-feature", "-encoding", "utf8", "-Xlint", "-Xsource:2.13")
 
 // ---- publishing ----
 
