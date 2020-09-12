@@ -1,9 +1,10 @@
 package de.sciss.kollflitz
 
-import org.scalatest.{Matchers, FlatSpec}
 import Ops._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class OpsSpec extends FlatSpec with Matchers {
+class OpsSpec extends AnyFlatSpec with Matchers {
   val blah = "allow the invocation of extended methods"
 
   "Some iterable collections" should blah in {

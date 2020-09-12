@@ -1,7 +1,7 @@
 # KollFlitz
 
-[![Build Status](https://travis-ci.org/Sciss/KollFlitz.svg?branch=master)](https://travis-ci.org/Sciss/KollFlitz)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.12)
+[![Build Status](https://travis-ci.org/Sciss/KollFlitz.svg?branch=main)](https://travis-ci.org/Sciss/KollFlitz)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.sciss/kollflitz_2.13)
 
 ## Statement
 
@@ -9,7 +9,7 @@ KollFlitz provides extension methods for the Scala standard collection library. 
 like calculating mean, variance or percentiles, mapping groups, counting occurrences etc.,
 as well as a number of collection operations available in [SuperCollider](https://supercollider.github.io/).
 
-It is released under the [GNU Lesser General Public License](https://git.iem.at/sciss/KollFlitz/raw/master/LICENSE) v2.1+
+It is released under the [GNU Lesser General Public License](https://git.iem.at/sciss/KollFlitz/raw/main/LICENSE) v2.1+
 and comes with absolutely no warranties. To contact the author, send an email to `contact at sciss.de`.
 
 ## Note
@@ -18,13 +18,13 @@ This is used for scientific projects and rapid prototyping. The emphasis is _not
 
 ## Requirements / Installation
 
-This project currently compiles against Scala 2.13, 2.12, 2.11, using sbt.
+This project compiles against Scala 2.13, 2.12, using sbt. The last version to support Scala 2.11 was v0.2.3.
 
 To use the library in your project:
 
     "de.sciss" %% "kollflitz" % v
 
-The current version `v` is `"0.2.3"`.
+The current version `v` is `"0.2.4"`.
 
 To play around with these operations, run `sbt console`.
 
