@@ -18,7 +18,8 @@ This is used for scientific projects and rapid prototyping. The emphasis is _not
 
 ## Requirements / Installation
 
-This project compiles against Scala 2.13, 2.12, using sbt. The last version to support Scala 2.11 was v0.2.3.
+This project builds with sbt against Scala 2.13, 2.12 (JVM), and Scala 2.13 (JS). 
+The last version to support Scala 2.11 was v0.2.3.
 
 To use the library in your project:
 
