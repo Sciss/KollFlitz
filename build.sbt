@@ -5,7 +5,7 @@ lazy val projectVersion = "0.2.4"
 lazy val mimaVersion    = "0.2.1"
 
 lazy val commonJvmSettings = Seq(
-  crossScalaVersions := Seq("3.0.0-RC1", "2.13.4", "2.12.13"),
+  crossScalaVersions := Seq("3.0.0-RC2", "2.13.5", "2.12.13"),
 )
 
 // sonatype plugin requires that these are in global
@@ -18,13 +18,13 @@ lazy val root = crossProject(JVMPlatform, JSPlatform).in(file("."))
     name               := baseName,
 //    version            := projectVersion,
 //    organization       := "de.sciss",
-    scalaVersion       := "2.13.4",
+    scalaVersion       := "2.13.5",
     description        := "Useful methods for Scala collections which I tend to copy and paste once a week",
     homepage           := Some(url(s"https://git.iem.at/sciss/${name.value}")),
     licenses           := Seq("LGPL v2.1+" -> url("http://www.gnu.org/licenses/lgpl-2.1.txt")),
     mimaPreviousArtifacts := Set("de.sciss" %% baseNameL % mimaVersion),
     libraryDependencies += {
-      "org.scalatest" %%% "scalatest" % "3.2.4" % Test
+      "org.scalatest" %%% "scalatest" % "3.2.7" % Test
     },
     initialCommands in console := {
       """import de.sciss.kollflitz._
